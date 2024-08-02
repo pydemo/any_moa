@@ -23,21 +23,21 @@ To run one shot or interactive demo, follow these 3 steps:
 
 ### Export Your API Keys:
    ```
- export TOGETHER_API_KEY={your_key}
- export GROQ_API_KEY={your_key}
- export DEEPINFRA_API_KEY={your_key}
+    export TOGETHER_API_KEY={your_key}
+    export GROQ_API_KEY={your_key}
+    export DEEPINFRA_API_KEY={your_key}
    ```
 ### Install Requirements:
      ```
-conda create -n any_moa
-conda activate any_moa
-pip install pyaml, aiohttp, groq, together, groq
+   conda create -n any_moa
+   conda activate any_moa
+   pip install pyaml, aiohttp, groq, together, groq
    
    ```
 ### Run the demo script:
-    for Groq:  `python groq_moa.py`
-    for Togeter:  `python together_moa.py`
-    for DeepInfra `python deepinfra_moa.py`
+ for Groq:  `python groq_moa.py`
+ for Togeter:  `python together_moa.py`
+ for DeepInfra `python deepinfra_moa.py`
 
 ### Run the interactive CLI script:
 
