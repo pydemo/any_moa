@@ -59,7 +59,7 @@ def main(yaml_file_path, num_of_layers):
                     print(f"Layer {i}")
                     results = await asyncio.gather(*[api['run'](get_client(api['api']), i, api['model'],user_prompt, prev_response=results) for api in apis])
 
-                print("Final layer")
+                print(f"Final layer (Aggregator: {aggregator_api}/{aggregator_model})")
                 print()
                 final_stream_api = globals()[aggregator_api].get_final_stream
                 async for chunk in final_stream_api(get_client(aggregator_api), aggregator_model,user_prompt,results):
