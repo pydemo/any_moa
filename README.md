@@ -14,24 +14,6 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 - Visualization of intermediate layer outputs
 - Customizable agent parameters through the UI
 
-## Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/skapadia3214/groq-moa.git
-   cd groq-moa
-   ```
-
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-3. Set up your environment variables:
-   Create a `.env` file in the root directory and add your Groq API key:
-   ```
-   GROQ_API_KEY=your_api_key_here
-   ```
 
 ## CLI Demo
 
