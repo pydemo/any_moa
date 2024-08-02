@@ -8,11 +8,10 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 
 ## Features
 
-- Interactive chat interface powered by MOA
-- Configurable main model and layer agents
+- Interactive chat interface
+- Configurable model list/source and number of layers 
 - Real-time streaming of responses
-- Visualization of intermediate layer outputs
-- Customizable agent parameters through the UI
+
 
 
 ## CLI Demo
