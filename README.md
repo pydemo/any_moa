@@ -41,8 +41,22 @@ To run one shot or interactive demo, follow these 3 steps:
 
 ### Run the interactive CLI script:
 
-`python any_moa.py`
+`python bot.py  config\mixed_reference_models.yaml`
 
+#### Model file
+Mixed model file contains models from different API vendors: Groq, Together, and Deepinfra
+```
+reference_models:
+  - name: "llama3-70b-8192"
+    api: "groq"
+    aggregator: True
+  - name: "Qwen/Qwen1.5-72B-Chat"
+    api: "together"
+  - name: "google/gemma-2-9b-it"
+    api: "deepinfra"
+  - name: "microsoft/WizardLM-2-7B"
+    api: "deepinfra"
+```
 The CLI will prompt you to input instructions interactively:
 
 1. Start by entering your instruction at the ">>>" prompt.
