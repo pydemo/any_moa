@@ -20,13 +20,13 @@ This CLI demo showcases a multi-layer inference API where the final response is 
 
 To run one shot or interactive demo, follow these 3 steps:
 
-### Export Your API Keys:
+1. ### Export Your API Keys:
 ```
     export TOGETHER_API_KEY={your_key}
     export GROQ_API_KEY={your_key}
     export DEEPINFRA_API_KEY={your_key}
 ```
-### Install Requirements:
+2. ### Install Requirements:
 ```
    conda create -n any_moa
    conda activate any_moa
@@ -34,7 +34,7 @@ To run one shot or interactive demo, follow these 3 steps:
    
 ```
 
-### Run the interactive CLI script:
+3. ### Run the interactive CLI script:
 2 params: yaml file, number of layers<br>
 `python bot.py  config\mixed_reference_models.yaml 3` 
 
