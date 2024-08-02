@@ -2,7 +2,7 @@
 Mixture Of Agents for with flexible input model sets from different API vendors.
 Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=readme-ov-file) and [tagether-moa](https://github.com/togethercomputer/MoA?tab=readme-ov-file#multi-layer-moa-example)
 
-![MOA Architecture](./static/moa_groq.svg)
+![MOA Architecture](https://github.com/togethercomputer/MoA/blob/main/assets/moa-3layer.png?raw=true)
 *Source: Adaptation of [Together AI Blog - Mixture of Agents](https://www.together.ai/blog/together-moa)*
 
 
@@ -37,7 +37,7 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 
 This CLI demo showcases a multi-layer inference API where the final response is aggregated from various reference models.
 
-To run the interactive demo, follow these 3 steps:
+To run one shot or interactive demo, follow these 3 steps:
 
 ### Export Your API Keys:
    ```
@@ -46,14 +46,13 @@ To run the interactive demo, follow these 3 steps:
  export DEEPINFRA_API_KEY={your_key}
    ```
 ### Install Requirements:
-  
-   ```
+     ```
 conda create -n any_moa
 conda activate any_moa
 pip install pyaml, aiohttp, groq, together, groq
    
    ```
-### Run the test script:
+### Run the demo script:
     for Groq:  `python groq_moa.py`
     for Togeter:  `python together_moa.py`
     for DeepInfra `python deepinfra_moa.py`
@@ -61,6 +60,7 @@ pip install pyaml, aiohttp, groq, together, groq
 ### Run the interactive CLI script:
 
 `python any_moa.py`
+
 The CLI will prompt you to input instructions interactively:
 
 1. Start by entering your instruction at the ">>>" prompt.
