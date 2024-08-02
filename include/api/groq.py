@@ -7,20 +7,13 @@ from pprint import pprint as pp
 
 aggregator_model = "llama3-70b-8192"
 
-user_prompt = """
-Fuse this image prompt with new ideas. Be as creative and weird as possible. Return a 100-word paragraph:
 
-ukrainian flag, SurrealArt, DoubleExposure, VisualSplitting, DynamicArt, EtherealBeauty, ArtisticMotion, WaterfallArt, CreativePhotography, ModernArt, ConceptualArt, VisualArt, PhotoManipulation, UniqueArt, VisualStorytelling, ArtisticExpression, MovementArt, DigitalArt, VisualEffects, SurrealMotion, InnovativeArt, DynamicVisuals, WomanInArt, VisualArtistry, ArtisticVision, ArtisticPortrait, CreativeConcepts, FutureArt, ArtisticBeauty, VisualMagic
-"""
+class AsyncClient(AsyncGroq):   
+    def __init__(self, api_key):
+        super().__init__(api_key=api_key)
 
-
-aggregator_system_prompt = """You have been provided with a set of responses from various open-source models to the latest user query. Your task is to synthesize these responses into a single, high-quality response. It is crucial to critically evaluate the information provided in these responses, recognizing that some of it may be biased or incorrect. Your response should not simply replicate the given answers but should offer a refined, accurate, and comprehensive reply to the instruction. Ensure your response is well-structured, coherent, and adheres to the highest standards of accuracy and reliability.
-
-Responses from models:"""
-
-
-async def get_final_stream(client,aggregator_model,  results):
-    sys_prompt = get_final_system_prompt(aggregator_system_prompt, results)
+async def get_final_stream(client,aggregator_model,user_prompt,  results):
+    sys_prompt = get_final_system_prompt( results)
     
     final_stream = await client.chat.completions.create(
         model=aggregator_model,
@@ -37,12 +30,12 @@ async def get_final_stream(client,aggregator_model,  results):
         yield chunk.choices[0].delta.content or ""
     
 
-async def run_llm(client, layer, model, prev_response=None):
+async def run_llm(client, layer, model, user_prompt,prev_response=None):
     """Run a single LLM call with a model while accounting for previous responses + rate limits."""
     print(f'\t{layer}: run_llm:', model)
     sys_prompt = None
     if prev_response:
-        sys_prompt = get_final_system_prompt( aggregator_system_prompt, prev_response)
+        sys_prompt = get_final_system_prompt(  prev_response)
         #pp(sys_prompt)
 
     for sleep_time in [1, 2, 4]:
@@ -64,7 +57,7 @@ async def run_llm(client, layer, model, prev_response=None):
                 temperature=0.7,
                 max_tokens=512,
             )
-            print(f"\t\t{layer}: {sleep_time}: Model: ", model)
+            #rint(f"\t\t{layer}: sleep: {sleep_time}sec: Model: ", model)
             break
         except groq.RateLimitError as e:
             print(e)
