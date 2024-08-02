@@ -32,7 +32,7 @@ async def get_final_stream(client,aggregator_model,user_prompt,  results):
 
 async def run_llm(client, layer, model, user_prompt,prev_response=None):
     """Run a single LLM call with a model while accounting for previous responses + rate limits."""
-    print(f'\t{layer}: run_llm:', model)
+    print(f'\t{layer}:      groq: run_llm:', model)
     sys_prompt = None
     if prev_response:
         sys_prompt = get_final_system_prompt(  prev_response)
@@ -57,7 +57,7 @@ async def run_llm(client, layer, model, user_prompt,prev_response=None):
                 temperature=0.7,
                 max_tokens=512,
             )
-            print(f"\t\t{layer}: Sleep: {sleep_time}: Model: ", model)
+            print(f"\t\t{layer}:     groq: Sleep: {sleep_time}: Model: ", model)
             break
         except groq.RateLimitError as e:
             print(e)
