@@ -1,6 +1,6 @@
 # any_moa
 Mixture Of Agents for with flexible input model sets from different API vendors.
-Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=readme-ov-file) and [tagether-moa](https://github.com/togethercomputer/MoA?tab=readme-ov-file#multi-layer-moa-example)
+Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=readme-ov-file) and [together-moa](https://github.com/togethercomputer/MoA?tab=readme-ov-file#multi-layer-moa-example)
 
 ![MOA Architecture](https://github.com/togethercomputer/MoA/blob/main/assets/moa-3layer.png?raw=true)
 *Source: Adaptation of [Together AI Blog - Mixture of Agents](https://www.together.ai/blog/together-moa)*
