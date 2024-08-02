@@ -59,15 +59,14 @@ reference_models:
 ```
 The CLI will prompt you to input instructions interactively:
 
-1. Start by entering your instruction at the ">>>" prompt.
-2. The system will process your input using the predefined reference models.
-3. It will generate a response based on the aggregated outputs from these models.
-4. You can continue the conversation by inputting more instructions, with the system maintaining the context of the multi-turn interaction.
+1.  Begin by typing your prompt at the "Enter your prompt (Top things to do in Jersey City):" prompt.
+2.  The system will process your input using predefined reference models.
+3.  It will create a response based on the combined outputs from these models.
+4.  You can keep the conversation going by entering additional prompts, with the system remembering the context of the ongoing interaction.
 
 ## Configuration
 
 The MOA system can be configured through modification/creation of new YAML files in 'config' dir:
-
 
 ## Contributing
 
