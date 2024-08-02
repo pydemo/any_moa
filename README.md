@@ -33,10 +33,6 @@ To run one shot or interactive demo, follow these 3 steps:
    pip install pyaml, aiohttp, groq, together, groq
    
 ```
-### Run the demo script:
- for Groq:  `python groq_moa.py`
- for Togeter:  `python together_moa.py`
- for DeepInfra `python deepinfra_moa.py`
 
 ### Run the interactive CLI script:
 2 params: yaml file, number of layers<br>
