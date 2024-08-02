@@ -88,5 +88,3 @@ This project is licensed under the Apache 2.0. See the [LICENSE](LICENSE) file f
 
 - [Groq](https://groq.com/) for providing the underlying language models
 - [Together AI](https://www.together.ai/) for proposing the Mixture of Agents architecture and providing the conceptual image
-
-- 
