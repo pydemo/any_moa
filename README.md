@@ -39,7 +39,7 @@ To run one shot or interactive demo, follow these 3 steps:
  for DeepInfra `python deepinfra_moa.py`
 
 ### Run the interactive CLI script:
-2 params: yaml file, number of layers
+2 params: yaml file, number of layers<br>
 `python bot.py  config\mixed_reference_models.yaml 3` 
 
 
