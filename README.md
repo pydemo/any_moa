@@ -1,5 +1,5 @@
 # any_moa
-Mixture Of Agents for with flexible input model sets from different API vendors.
+Mixture Of Agents with flexible input model sets from different API vendors.
 Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=readme-ov-file) and [together-moa](https://github.com/togethercomputer/MoA?tab=readme-ov-file#multi-layer-moa-example)
 
 ![MOA Architecture](https://github.com/togethercomputer/MoA/blob/main/assets/moa-3layer.png?raw=true)
@@ -8,11 +8,10 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 
 ## Features
 
-- Interactive chat interface powered by MOA
-- Configurable main model and layer agents
+- Interactive chat interface
+- Configurable model list/source and number of layers 
 - Real-time streaming of responses
-- Visualization of intermediate layer outputs
-- Customizable agent parameters through the UI
+
 
 
 ## CLI Demo
@@ -21,27 +20,24 @@ This CLI demo showcases a multi-layer inference API where the final response is 
 
 To run one shot or interactive demo, follow these 3 steps:
 
-### Export Your API Keys:
+1. ### Export Your API Keys:
 ```
     export TOGETHER_API_KEY={your_key}
     export GROQ_API_KEY={your_key}
     export DEEPINFRA_API_KEY={your_key}
 ```
-### Install Requirements:
+2. ### Install Requirements:
 ```
    conda create -n any_moa
    conda activate any_moa
    pip install pyaml, aiohttp, groq, together, groq
    
 ```
-### Run the demo script:
- for Groq:  `python groq_moa.py`
- for Togeter:  `python together_moa.py`
- for DeepInfra `python deepinfra_moa.py`
 
-### Run the interactive CLI script:
+3. ### Run the interactive CLI script:
+2 params: yaml file, number of layers<br>
+`python bot.py  config\mixed_reference_models.yaml 3` 
 
-`python bot.py  config\mixed_reference_models.yaml`
 
 #### Model file
 Mixed model file contains models from different API vendors: Groq, Together, and Deepinfra
@@ -88,5 +84,3 @@ This project is licensed under the Apache 2.0. See the [LICENSE](LICENSE) file f
 
 - [Groq](https://groq.com/) for providing the underlying language models
 - [Together AI](https://www.together.ai/) for proposing the Mixture of Agents architecture and providing the conceptual image
-
-- 
