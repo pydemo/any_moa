@@ -10,6 +10,7 @@ import include.api.groq as groq
 import include.api.together as together
 import include.api.openai as openai 
 import include.api.mistral as mistral
+import include.api.nvidia as nvidia
 e=sys.exit
 
 
@@ -19,7 +20,7 @@ def get_client (api):
     if api not in clients:
         client_api = globals()[api].AsyncClient
         api_key = os.getenv(f"{api.upper()}_API_KEY")
-        assert api_key, f"API key for {api_key} not found"
+        assert api_key, f"API key for '{api}' not found"
         clients[api] =  client_api(api_key)
 
     return clients[api]

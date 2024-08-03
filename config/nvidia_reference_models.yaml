@@ -1,0 +1,15 @@
+reference_models:
+  - name: "upstage/solar-10.7b-instruct"
+    api: "nvidia"
+    aggregator: True
+
+  - name: "snowflake/arctic"
+    api: "nvidia"
+
+  - name: "seallms/seallm-7b-v2.5"
+    api: "nvidia"
+
+  - name: "01-ai/yi-large"
+    api: "nvidia"
+    
+
