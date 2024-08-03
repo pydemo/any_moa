@@ -39,7 +39,7 @@ To run one shot or interactive demo, follow these 3 steps:
 `python bot.py  config\mixed_reference_models.yaml 3` 
 
 #### Model file
-Mixed model file contains models from different API vendors: Groq, Together, and Deepinfra
+Mixed model file contains models from different API vendors: Groq, Together, OpenAI, and Deepinfra
 ```
 reference_models:
   - name: "llama3-70b-8192"
