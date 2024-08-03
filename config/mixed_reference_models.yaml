@@ -7,4 +7,4 @@ reference_models:
   - name: "google/gemma-2-9b-it"
     api: "deepinfra"
   - name: "gpt-4o-mini"
-    api: "openai" 
+    api: "openai"  
