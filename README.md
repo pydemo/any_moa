@@ -5,14 +5,13 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 ![MOA Architecture](https://github.com/togethercomputer/MoA/blob/main/assets/moa-3layer.png?raw=true)
 *Source: Adaptation of [Together AI Blog - Mixture of Agents](https://www.together.ai/blog/together-moa)*
 
-
 ## Features
-
 - Interactive chat interface
 - Configurable model list/source and number of layers 
 - Real-time streaming of responses
 
-
+## APIs
+OpeaAI, Groq, DeepInfra, Together
 
 ## CLI Demo
 
@@ -38,7 +37,6 @@ To run one shot or interactive demo, follow these 3 steps:
 2 params: yaml file, number of layers<br>
 `python bot.py  config\mixed_reference_models.yaml 3` 
 
-
 #### Model file
 Mixed model file contains models from different API vendors: Groq, Together, and Deepinfra
 ```
@@ -50,8 +48,8 @@ reference_models:
     api: "together"
   - name: "google/gemma-2-9b-it"
     api: "deepinfra"
-  - name: "microsoft/WizardLM-2-7B"
-    api: "deepinfra"
+  - name: "gpt-4o-mini"
+    api: "openai" 
 ```
 The CLI will prompt you to input instructions interactively:
 
