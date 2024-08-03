@@ -24,6 +24,7 @@ To run one shot or interactive demo, follow these 3 steps:
     export TOGETHER_API_KEY={your_key}
     export GROQ_API_KEY={your_key}
     export DEEPINFRA_API_KEY={your_key}
+    export OPENAI_API_KEY={your_key}
 ```
 2. ### Install Requirements:
 ```
