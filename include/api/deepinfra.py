@@ -145,6 +145,8 @@ async def run_llm(client, layer, model, user_prompt, prev_response=None):
         max_tokens=512,
     )
     if isinstance(response, dict):
+        assert response['choices'][0]['message']['content']
+        print(f'\t  {layer}:','deepinfra'.rjust(10,' '),':{model}:Content:', response['choices'][0]['message']['content'][:50])
         return response['choices'][0]['message']['content']
     else:
         raise DeepInfraAPIError(

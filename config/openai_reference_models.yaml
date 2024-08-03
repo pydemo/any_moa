@@ -1,0 +1,12 @@
+reference_models:
+  - name: "gpt-4o"
+    api: "openai"
+    aggregator: True
+  - name: "gpt-4-turbo"
+    api: "openai"
+  - name: "gpt-4o-mini"
+    api: "openai"
+  - name: "gpt-4"
+    api: "openai"
+
+    

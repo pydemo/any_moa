@@ -6,5 +6,5 @@ reference_models:
     api: "together"
   - name: "google/gemma-2-9b-it"
     api: "deepinfra"
-  - name: "microsoft/WizardLM-2-7B"
-    api: "deepinfra" 
+  - name: "gpt-4o-mini"
+    api: "openai" 
