@@ -10,3 +10,5 @@ reference_models:
     api: "openai"  
   - name: "mistral-large-latest"
     api: "mistral"    
+  - name: "upstage/solar-10.7b-instruct"
+    api: "nvidia"
