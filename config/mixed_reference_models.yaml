@@ -12,3 +12,5 @@ reference_models:
     api: "mistral"    
   - name: "upstage/solar-10.7b-instruct"
     api: "nvidia"
+  - name: "deepseek-chat"
+    api: "deepseek"    

@@ -1,0 +1,10 @@
+reference_models:
+  - name: "deepseek-chat"
+    api: "deepseek"
+    aggregator: True
+  - name: "deepseek-coder"
+    api: "deepseek"    
+
+
+    
+

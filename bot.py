@@ -11,6 +11,7 @@ import include.api.together as together
 import include.api.openai as openai 
 import include.api.mistral as mistral
 import include.api.nvidia as nvidia
+import include.api.deepseek as deepseek
 e=sys.exit
 
 
