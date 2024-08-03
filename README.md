@@ -11,7 +11,7 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 - Real-time streaming of responses
 
 ## APIs
-OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia
+OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia, Deepseek
 
 ## CLI Demo
 
@@ -27,6 +27,7 @@ To run one shot or interactive demo, follow these 3 steps:
     export OPENAI_API_KEY={your_key}
     export MISTRAL_API_KEY={your_key}
     export NVIDIA_API_KEY={your_key}
+    export DEEPSEEK_API_KEY={your_key}
 ```
 2. ### Install Requirements:
 ```
@@ -40,7 +41,7 @@ To run one shot or interactive demo, follow these 3 steps:
 `python bot.py  config\mixed_reference_models.yaml 3` 
 
 #### Model file
-Mixed model file contains models from different API vendors: Groq, Together, OpenAI, Mistra, Nvidia, and Deepinfra
+Mixed model file contains models from different API vendors: Groq, Together, OpenAI, Mistra, Nvidia, DeepSeek and Deepinfra
 ```
 reference_models:
   - name: "llama3-70b-8192"
@@ -55,7 +56,9 @@ reference_models:
   - name: "mistral-large-latest"
     api: "mistral"
   - name: "mistral-large-latest"
-    api: "nvidia" 
+    api: "nvidia"
+  - name: "deepseek-chat"
+    api: "deepseek" 
 ```
 The CLI will prompt you to input instructions interactively:
 
