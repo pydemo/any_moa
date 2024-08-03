@@ -1,0 +1,13 @@
+reference_models:
+  - name: "mistral-large-latest"
+    api: "mistral"
+    aggregator: True
+  - name: "mistral-small"
+    api: "mistral"
+  - name: "open-mixtral-8x22b"
+    api: "mistral"    
+  - name: "open-mixtral-8x7b"
+    api: "mistral"       
+
+
+    

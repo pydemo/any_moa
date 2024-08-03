@@ -9,6 +9,7 @@ import include.api.deepinfra as deepinfra
 import include.api.groq as groq
 import include.api.together as together
 import include.api.openai as openai 
+import include.api.mistral as mistral
 e=sys.exit
 
 

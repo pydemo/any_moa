@@ -77,5 +77,5 @@ async def run_llm(client, layer, model,user_prompt, prev_response=None):
             print(e)
             await asyncio.sleep(sleep_time)
     assert response.choices[0].message.content
-    print(f'\t  {layer}:','together'.rjust(10,' '),':{model}:Content:', response.choices[0].message.content[:50])
+    print(f'\t  {layer}:','together'.rjust(10,' '),f':{model}:Content:', response.choices[0].message.content[:50])
     return response.choices[0].message.content

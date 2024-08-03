@@ -3,3 +3,4 @@ groq-moa
 *.pyc
 advanced*.py
 myenv
+misc
