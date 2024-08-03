@@ -69,7 +69,7 @@ def main(yaml_file_path, num_of_layers):
                         print(chunk, end='', flush=True)
                 print()
         finally:
-            close_clients
+            close_clients()
     asyncio.run(async_main())
 if __name__ == "__main__":
     main()
