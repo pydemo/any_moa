@@ -63,18 +63,6 @@ The CLI will prompt you to input instructions interactively:
 
 The MOA system can be configured through modification/creation of new YAML files in 'config' dir:
 
-## Contributing
-
-Contributions to this project are welcome! Please follow these steps to contribute:
-
-1. Fork the repository
-2. Create a new branch for your feature or bug fix
-3. Make your changes and commit them with descriptive commit messages
-4. Push your changes to your fork
-5. Submit a pull request to the main repository
-
-Please ensure that your code adheres to the project's coding standards and includes appropriate tests and documentation.
-
 ## License
 
 This project is licensed under the Apache 2.0. See the [LICENSE](LICENSE) file for details.
