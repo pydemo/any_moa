@@ -12,6 +12,7 @@ import include.api.openai as openai
 import include.api.mistral as mistral
 import include.api.nvidia as nvidia
 import include.api.deepseek as deepseek
+import include.api.hugging_face as hugging_face
 e=sys.exit
 
 

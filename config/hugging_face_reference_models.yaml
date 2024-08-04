@@ -1,0 +1,15 @@
+reference_models:
+  - name: "openai-community/gpt2-xl"
+    api: "hugging_face"
+    aggregator: True
+
+  - name: "mistralai/Mistral-Nemo-Instruct-2407"
+    api: "hugging_face"
+
+  - name: "HuggingFaceTB/SmolLM-135M"
+    api: "hugging_face"
+  
+  - name: "meta-llama/Meta-Llama-3-8B-Instruct"
+    api: "hugging_face"
+
+    
