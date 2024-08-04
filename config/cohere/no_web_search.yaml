@@ -1,0 +1,7 @@
+reference_models:
+  - name: "command-r-plus"
+    api: "cohere"
+    
+    aggregator: True
+
+    

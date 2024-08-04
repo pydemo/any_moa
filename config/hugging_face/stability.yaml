@@ -1,0 +1,6 @@
+reference_models:
+  - name: "stabilityai/stablelm-2-12b-chat"
+    api: "hugging_face"
+    aggregator: True
+
+    

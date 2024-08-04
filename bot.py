@@ -15,8 +15,14 @@ import include.api.deepseek as deepseek
 import include.api.hugging_face as hugging_face
 import include.api.anthropic as anthropic
 import include.api.gemini as gemini
+import include.api.cohere as cohere
 e=sys.exit
 
+import include.config.init_config as init_config 
+
+init_config.init(**{})
+apc = init_config.apc
+apc.models={}
 
 clients={}
 def get_client (api):
@@ -28,7 +34,12 @@ def get_client (api):
         clients[api] =  client_api(api_key)
 
     return clients[api]
-    
+def save_models(reference_models):    
+    for x in reference_models:
+        model_id=x['name']
+        assert model_id not in apc.models
+        apc.models[model_id]=x
+       
 def close_clients():
     global clients
     for client in clients.values():
@@ -44,7 +55,8 @@ def main(yaml_file_path, num_of_layers):
             data = yaml.safe_load(file)
 
         reference_models = data['reference_models']
-        
+        save_models(reference_models)
+
 
         aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
         aggregator_api = next((model['api'] for model in data['reference_models'] if model.get('aggregator')), None)
@@ -59,6 +71,7 @@ def main(yaml_file_path, num_of_layers):
                 if not user_prompt:
                     user_prompt = default_prompt
                 apis = [dict(run=getattr(globals()[model['api']], 'run_llm'), model=model['name'], api=model['api']) for model in reference_models]
+
                 print('Layer 0')
                 results = await asyncio.gather(*[api['run'](get_client(api['api']), 0, api['model'], user_prompt) for api in apis])
                 print("Running layers...")

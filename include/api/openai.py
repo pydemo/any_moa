@@ -62,6 +62,8 @@ async def run_llm(client, layer, model, user_prompt,prev_response=None):
         except openai.RateLimitError as e:
             print(e)
             await asyncio.sleep(sleep_time)
-    assert response.choices[0].message.content
-    print(f'\t  {layer}:','openai'.rjust(10,' '),f':{model}:Content:', response.choices[0].message.content[:50])
-    return response.choices[0].message.content
+    content= response.choices[0].message.content
+    #print (model)
+    
+    print(f'\t  {layer}:','openai'.rjust(10,' '),f':{model}:Content:', len(content))
+    return content
