@@ -54,8 +54,8 @@ async def run_llm(client, layer, model, user_prompt,prev_response=None):
             response = await client.chat.completions.create(
                 model=model,
                 messages=messages, 
-                temperature=0.7,
-                max_tokens=512,
+                #temperature=0.7,
+                #max_tokens=512,
             )
             #print(f"\t\t{layer}:     openai: Sleep: {sleep_time}: Model: ", model)
             break

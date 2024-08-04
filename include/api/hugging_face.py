@@ -13,7 +13,7 @@ e=sys.exit
 class AsyncClient(AsyncInferenceClient):
     def __init__(self, api_key):
         
-        super().__init__( model="mistralai/Mistral-Nemo-Instruct-2407", token=api_key)    
+        super().__init__( token=api_key)    
 
     async def chat(self, model, messages):
         response = await self.chat_completion(messages, max_tokens=500)

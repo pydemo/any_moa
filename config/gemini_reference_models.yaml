@@ -1,0 +1,9 @@
+reference_models:
+  - name: "gemini-1.5-flash"
+    api: "gemini"
+    aggregator: True
+  - name: "gemini-1.5-pro"
+    api: "gemini"
+  - name: "gemini-1.0-pro"
+    api: "gemini"    
+

@@ -14,6 +14,7 @@ import include.api.nvidia as nvidia
 import include.api.deepseek as deepseek
 import include.api.hugging_face as hugging_face
 import include.api.anthropic as anthropic
+import include.api.gemini as gemini
 e=sys.exit
 
 
