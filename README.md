@@ -11,7 +11,7 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 - Real-time streaming of responses
 
 ## APIs
-OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia, Deepseek, Hugging Face, Anthropic, Google Gemini
+OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia, Deepseek, Hugging Face, Anthropic, Google Gemini, Cohere
 
 ## CLI Demo
 
@@ -31,12 +31,13 @@ To run one shot or interactive demo, follow these 3 steps:
     export HUGGING_FACE_API_KEY={your_key}
     export ANHROPIC_API_KEY={your_key}
     export GEMINI_API_KEY={your_project_name}
+    export COHERE_API_KEY={your_key}  <- web search
 ```
 2. ### Install Requirements:
 ```
    conda create -n any_moa
    conda activate any_moa
-   pip install pyaml, aiohttp, groq, together, openai, mistralai, huggingface_hub, anthropic, google-cloud-aiplatform
+   pip install pyaml, aiohttp, groq, together, openai, mistralai, huggingface_hub, anthropic, google-cloud-aiplatform, cohere
 ```
 
 3. ### Run the interactive CLI script:
@@ -44,7 +45,7 @@ To run one shot or interactive demo, follow these 3 steps:
 `python bot.py  config\mixed_reference_models.yaml 3` 
 
 #### Model file
-Mixed model file contains models from different API vendors: Groq, Together, OpenAI, Mistra, Nvidia, DeepSeek, Hugging Face, Google Gemini and Deepinfra
+Mixed model file contains models from different API vendors: Groq, Together, OpenAI, Mistra, Nvidia, DeepSeek, Hugging Face, Google Gemini, Deepinfra, and Cohere
 ```
 reference_models:
   - name: "llama3-70b-8192"
@@ -68,6 +69,8 @@ reference_models:
     api: "anthropic"
   - name: "gemini-1.5-flash"
     api: "gemini"
+  - name: "command-r-plus"
+    api: "cohere" 
 ```
 The CLI will prompt you to input instructions interactively:
 
