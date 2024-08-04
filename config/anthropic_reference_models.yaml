@@ -1,0 +1,9 @@
+reference_models:
+  - name: "claude-3-opus-20240229"
+    api: "anthropic"
+    aggregator: True
+  - name: "claude-3-sonnet-20240229"
+    api: "anthropic"
+  - name: "claude-3-haiku-20240307"
+    api: "anthropic"
+

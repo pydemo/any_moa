@@ -1,0 +1,12 @@
+reference_models:
+  - name: "ibm/granite-34b-code-instruct"
+    api: "nvidia"
+    aggregator: True
+  - name: "google/codegemma-7b"
+    api: "nvidia"
+  - name: "meta/codellama-70b"
+    api: "nvidia"
+  - name: "mistralai/codestral-22b-instruct-v0.1"
+    api: "nvidia"        
+    
+
