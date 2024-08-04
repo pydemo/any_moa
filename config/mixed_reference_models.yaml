@@ -17,4 +17,6 @@ reference_models:
   - name: "HuggingFaceTB/SmolLM-135M"
     api: "hugging_face"   
   - name: "claude-3-sonnet-20240229"
-    api: "anthropic"     
+    api: "anthropic" 
+  - name: "gemini-1.5-flash"
+    api: "gemini"        
