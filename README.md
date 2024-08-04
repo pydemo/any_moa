@@ -11,7 +11,7 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 - Real-time streaming of responses
 
 ## APIs
-OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia, Deepseek, Hugging Face
+OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia, Deepseek, Hugging Face, Anthropic
 
 ## CLI Demo
 
@@ -29,12 +29,13 @@ To run one shot or interactive demo, follow these 3 steps:
     export NVIDIA_API_KEY={your_key}
     export DEEPSEEK_API_KEY={your_key}
     export HUGGING_FACE_API_KEY={your_key}
+    export ANHROPIC_FACE_API_KEY={your_key}
 ```
 2. ### Install Requirements:
 ```
    conda create -n any_moa
    conda activate any_moa
-   pip install pyaml, aiohttp, groq, together, openai, mistralai, huggingface_hub
+   pip install pyaml, aiohttp, groq, together, openai, mistralai, huggingface_hub, anthropic
 ```
 
 3. ### Run the interactive CLI script:
@@ -62,6 +63,8 @@ reference_models:
     api: "deepseek"
   - name: "HuggingFaceTB/SmolLM-135M"
     api: "hugging_face"
+  - name: "claude-3-sonnet-20240229"
+    api: "anthropic"
 ```
 The CLI will prompt you to input instructions interactively:
 
