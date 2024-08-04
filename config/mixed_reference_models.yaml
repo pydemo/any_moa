@@ -15,4 +15,6 @@ reference_models:
   - name: "deepseek-chat"
     api: "deepseek"    
   - name: "HuggingFaceTB/SmolLM-135M"
-    api: "hugging_face"    
+    api: "hugging_face"   
+  - name: "claude-3-sonnet-20240229"
+    api: "anthropic"     
