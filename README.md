@@ -29,7 +29,7 @@ To run one shot or interactive demo, follow these 3 steps:
     export NVIDIA_API_KEY={your_key}
     export DEEPSEEK_API_KEY={your_key}
     export HUGGING_FACE_API_KEY={your_key}
-    export ANHROPIC_FACE_API_KEY={your_key}
+    export ANHROPIC_API_KEY={your_key}
 ```
 2. ### Install Requirements:
 ```
