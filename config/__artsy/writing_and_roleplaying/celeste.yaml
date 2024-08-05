@@ -1,0 +1,3 @@
+aggregator:
+  - name: "nothingiisreal/MN-12B-Celeste-V1.9"
+    api: "hugging_face"
