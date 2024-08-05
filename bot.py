@@ -16,6 +16,8 @@ import include.api.hugging_face as hugging_face
 import include.api.anthropic as anthropic
 import include.api.gemini as gemini
 import include.api.cohere as cohere
+import include.api.palm2 as palm2
+from include.common import get_aggregator 
 e=sys.exit
 
 import include.config.init_config as init_config 
@@ -23,8 +25,8 @@ import include.config.init_config as init_config
 init_config.init(**{})
 apc = init_config.apc
 apc.models={}
-
 clients={}
+
 def get_client (api):
     global clients
     if api not in clients:
@@ -34,27 +36,19 @@ def get_client (api):
         clients[api] =  client_api(api_key)
 
     return clients[api]
-def save_models(reference_models):    
-    for x in reference_models:
-        model_id=x['name']
-        assert model_id not in apc.models
-        apc.models[model_id]=x
+
        
 def close_clients():
     global clients
     for client in clients.values():
         client.close()
-def get_aggregator(data):
-    if 'aggregator' in data:
-        reference_aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
-        assert reference_aggregator_model is None, f"Ignoring aggregator defined in reference_models: {reference_aggregator_model}"
-        assert len(data['aggregator'])==1, f"Only one aggregator model is supported"
-        aggregator_model = data['aggregator'][0]['name']
-        aggregator_api = data['aggregator'][0]['api']
-    else:
-        aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
-        aggregator_api = next((model['api'] for model in data['reference_models'] if model.get('aggregator')), None)
-    return aggregator_model, aggregator_api
+
+def save_models(reference_models):    
+    for x in reference_models:
+        model_id=x['name']
+        assert model_id not in apc.models
+        apc.models[model_id]=x
+
 @click.command()
 @click.argument('yaml_file_path', type=click.Path(exists=True))
 @click.argument('num_of_layers', type=int, default=3)

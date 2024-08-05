@@ -1,24 +1,17 @@
 
 import os, sys
 import asyncio
-from concurrent.futures import ThreadPoolExecutor
+from google.cloud import aiplatform
+import vertexai
+from vertexai.language_models import ChatModel, TextGenerationModel
 from include.common import get_final_system_prompt
 from pprint import pprint as pp
 
-import vertexai
-from vertexai.generative_models import (
-    GenerationConfig,
-    GenerativeModel,
-    HarmBlockThreshold,
-    HarmCategory
-)
+
 e=sys.exit
 
 
 LOCATION = "us-central1"
-
-
-
 
     
 class AsyncClient:
@@ -28,23 +21,9 @@ class AsyncClient:
         self.model=None
         self.contents=None
         self.session = None
-        vertexai.init(project=api_key, location=LOCATION)
-
-        self.generation_config = GenerationConfig(
-            temperature=0.7,
-            max_output_tokens=1024,
-            top_p=0.8,
-            top_k=40,
-            candidate_count=1,
-        )
-
-        # Set safety settings
-        self.safety_settings = {
-            HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-            HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-            HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-            HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
-        }        
+        #aiplatform.init(project=self.project_id)
+        vertexai.init(project=self.project_id, location=LOCATION)
+       
     async def __aenter__(self):
         await self.initialize()
         return self
@@ -63,118 +42,161 @@ class AsyncClient:
             self.session = None    
 
     async def chat(self, model_id,user_prompt,  prev_response):
-        system_instruction={}
-        sys_prompt = None
+        
+        sys_prompt = ''
         if prev_response:
             sys_prompt = get_final_system_prompt(  prev_response)
-            system_instruction = {'system_instruction':[sys_prompt]}
+            
+
+        temperature=0
+        max_output_tokens=256
+        top_p=0.8
+        top_k=40
+
+        chat_model = ChatModel.from_pretrained(model_id)
+        parameters = {
+            "temperature": temperature,
+            "max_output_tokens": max_output_tokens,
+            "top_p": top_p,
+            "top_k": top_k,
+        }
+
+        # Set the system message
+        system_message = sys_prompt 
+
+        chat = chat_model.start_chat(context=system_message)
+        response = await asyncio.to_thread(chat.send_message,user_prompt, **parameters)
+        return response.text
+
+    async def text(self, model_id,user_prompt,  prev_response):
+        
+        sys_prompt = ''
+        if prev_response:
+            sys_prompt = get_final_system_prompt(  prev_response)
+            
+
+        temperature=0
+        max_output_tokens=256
+        top_p=0.8
+        top_k=40
+
+        model = TextGenerationModel.from_pretrained(model_id)
+        parameters = {
+            "temperature": temperature,
+            "max_output_tokens": max_output_tokens,
+            "top_p": top_p,
+            "top_k": top_k,
+        }
+
+   
+
+        prompt = f"{sys_prompt}\n\nHuman: {user_prompt}\n\nAssistant:"
+        response = await asyncio.to_thread(model.predict,prompt, **parameters)
+        return response.text
+
+    async def streaming_chat(self,aggregator_model,user_prompt,  results):
+        sys_prompt = get_final_system_prompt( results)
+
+    
+
+        chat_model = ChatModel.from_pretrained(aggregator_model)
 
 
+        temperature=0
+        max_output_tokens=256
+        top_p=0.8
+        top_k=40
+        
+        parameters = {
+            "temperature": temperature,
+            "max_output_tokens": max_output_tokens,
+            "top_p": top_p,
+            "top_k": top_k,
+        }
 
-        # Load a example model with system instructions
-        #MODEL_ID = 'gemini-pro'  # @param {type:"string"}
-        #pp(system_instruction)
-        self.model = GenerativeModel(
-            model_id,
-            **system_instruction
+        system_message = sys_prompt
+
+        chat = chat_model.start_chat(context=system_message)
+        responses = chat.send_message_streaming(
+        user_prompt, **parameters
         )
+        
 
+        for response in responses:
+            yield response.text
+
+    async def streaming_text(self,aggregator_model,user_prompt,  results):
+        sys_prompt = get_final_system_prompt( results)
+
+    
+
+        model = TextGenerationModel.from_pretrained(aggregator_model)
+
+
+        temperature=0
+        max_output_tokens=256
+        top_p=0.8
+        top_k=40
+        
+        parameters = {
+            "temperature": temperature,
+            "max_output_tokens": max_output_tokens,
+            "top_p": top_p,
+            "top_k": top_k,
+        }
 
         
-        prompt = f"""
-        User input: {user_prompt}
-        Answer:
-        """
 
-        # Set contents to send to the model
-        self.contents = [prompt]
+        prompt = f"{sys_prompt}\n\nHuman: {user_prompt}\n\nAssistant:"
+        stream = await asyncio.to_thread(model.predict_streaming, prompt, **parameters)
+    
 
-        # Counts tokens
-        #print(self.model.count_tokens(self.contents))
+        for response in stream:
+            chunk = response.text
+            yield chunk
 
-        output = await self.generate_content_async()
-        #print(output)
-        
-        return output
-
-    async def generate_content_async(self):
-        loop = asyncio.get_event_loop()
-        with ThreadPoolExecutor() as pool:
-            result = await loop.run_in_executor(pool, self.generate_content_sync)
-        return result    
-    def generate_content_sync(self):
-        assert self.model
-        assert self.contents    
-        # Set model parameters
-
-
-        response = self.model.generate_content(
-            self.contents,
-            generation_config=self.generation_config,
-            safety_settings=self.safety_settings,
-            stream=False,  # Ensure streaming is disabled
-        )
-        return response.text  # Access the text attribute directly            
+    
+            
     def close(self) -> None:
         pass
 
-    async def stream_content(self, model, contents):
-        stream = await model.generate_content_async(
-            contents,
-            generation_config=self.generation_config,
-            safety_settings=self.safety_settings,
-            stream=True,
-        )
-        
-        async for chunk in stream:
-            yield chunk.text
+
 
 async def get_final_stream(client,aggregator_model,user_prompt,  results):
-    sys_prompt = get_final_system_prompt( results)
-
-    system_instruction = {'system_instruction':[sys_prompt]}
-
-
-
-    # Load a example model with system instructions
-    #MODEL_ID = 'gemini-pro'  # @param {type:"string"}
-    #pp(system_instruction)
-    model = GenerativeModel(
-        aggregator_model,
-        **system_instruction
-    )
-
-
     
-    prompt = f"""
-    User input: {user_prompt}
-    Answer:
-    """
-
-    # Set contents to send to the model
-    contents = [prompt]
+    if aggregator_model.startswith('chat'):
+        async for response in client.streaming_chat(aggregator_model,user_prompt,  results):
+            yield response
+    else:
+        async for response in client.streaming_text(    aggregator_model,user_prompt,  results):
+            yield response
+        
     
-    #print(model.count_tokens(contents))
 
-    async for chunk in client.stream_content(model, contents):
-        yield chunk
-    
     
 
 
 async def run_llm(client, layer, model, user_prompt,prev_response=None):
     """Run a single LLM call with a model while accounting for previous responses + rate limits."""
-    print(f'\t{layer}:     gemini: run_llm:', model)
+    print(f'\t{layer}:      palm2: run_llm:', model)
 
-    
-    response = await client.chat(
-        model_id=model,
-        user_prompt=user_prompt,
-        prev_response=prev_response
-        #temperature=0.7,
-        # max_tokens=512,
-    )
-    #print(f"\t\t{layer}:     openai: Sleep: {sleep_time}: Model: ", model)
+    if model.startswith('chat'):
+        response = await client.chat(
+            model_id=model,
+            user_prompt=user_prompt,
+            prev_response=prev_response
+            #temperature=0.7,
+            # max_tokens=512,
+        )
+    else:
+        response = await client.text(
+            model_id=model,
+            user_prompt=user_prompt,
+            prev_response=prev_response
+            #temperature=0.7,
+            # max_tokens=512,
+        )
+  
     
     
     
@@ -184,5 +206,5 @@ async def run_llm(client, layer, model, user_prompt,prev_response=None):
     
 
     
-    print(f'\t  {layer}:','gemini'.rjust(10,' '),f':{model}:Content:', len(content))
+    print(f'\t  {layer}:','palm2'.rjust(10,' '),f':{model}:Content:', len(content))
     return content

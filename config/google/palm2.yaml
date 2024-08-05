@@ -1,0 +1,6 @@
+reference_models:
+  - name: "chat-bison@001"
+    api: "palm2"
+    aggregator: True
+  
+
