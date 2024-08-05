@@ -17,8 +17,9 @@ def get_final_system_prompt( results):
 
 def get_aggregator(data):
     if 'aggregator' in data:
-        reference_aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
-        assert reference_aggregator_model is None, f"Ignoring aggregator defined in reference_models: {reference_aggregator_model}"
+        if reference_models := data.get('reference_models', None  ):
+            reference_aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
+            assert reference_aggregator_model is None, f"Ignoring aggregator defined in reference_models: {reference_aggregator_model}"
         assert len(data['aggregator'])==1, f"Only one aggregator model is supported"
         aggregator_model = data['aggregator'][0]['name']
         aggregator_api = data['aggregator'][0]['api']

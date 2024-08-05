@@ -1,0 +1,6 @@
+#level 1
+aggregator:
+  - name: "KISTI-KONI/KONI-Llama3-8B-Instruct-20240729"
+    api: "hugging_face"  
+
+      

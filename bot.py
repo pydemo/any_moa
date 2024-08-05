@@ -58,8 +58,11 @@ def main(yaml_file_path, num_of_layers):
         with open(yaml_file_path, 'r') as file:
             data = yaml.safe_load(file)
 
-        reference_models = data['reference_models']
-        save_models(reference_models)
+        if reference_models := data.get('reference_models', None  ):
+            save_models(reference_models)
+        else:
+            print('No reference models found')
+            assert num_of_layers==1, 'num_of_layers for aggregator only pipeline should be 1'
 
         aggregator_model, aggregator_api = get_aggregator(data) 
         print(f"Aggregator API: {aggregator_api}")
@@ -73,8 +76,11 @@ def main(yaml_file_path, num_of_layers):
                 user_prompt = input(f"Enter your prompt ({default_prompt}): ")
                 if not user_prompt:
                     user_prompt = default_prompt
-                apis = [dict(run=getattr(globals()[model['api']], 'run_llm'), model=model['name'], api=model['api']) for model in reference_models]
+                
                 if num_of_layers>1:
+
+                    assert reference_models
+                    apis = [dict(run=getattr(globals()[model['api']], 'run_llm'), model=model['name'], api=model['api']) for model in reference_models]
                     print('Layer 0')
                     results = await asyncio.gather(*[api['run'](get_client(api['api']), 0, api['model'], user_prompt) for api in apis])
                     print("Running layers...")
