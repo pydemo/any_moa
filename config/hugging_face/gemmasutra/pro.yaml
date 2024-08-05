@@ -1,0 +1,4 @@
+reference_models:
+  - name: "TheDrummer/Gemmasutra-Pro-27B-v1"
+    api: "hugging_face"
+    aggregator: True
