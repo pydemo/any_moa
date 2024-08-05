@@ -1,0 +1,4 @@
+reference_models:
+  - name: "TheDrummer/Gemmasutra-Mini-2B-v1"
+    api: "hugging_face"
+    aggregator: True
