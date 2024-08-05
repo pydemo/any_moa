@@ -1,7 +1,7 @@
 
 import os, sys
 import asyncio
-from google.cloud import aiplatform
+
 import vertexai
 from vertexai.language_models import ChatModel, TextGenerationModel
 from include.common import get_final_system_prompt
