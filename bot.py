@@ -71,13 +71,16 @@ def main(yaml_file_path, num_of_layers):
                 if not user_prompt:
                     user_prompt = default_prompt
                 apis = [dict(run=getattr(globals()[model['api']], 'run_llm'), model=model['name'], api=model['api']) for model in reference_models]
-
-                print('Layer 0')
-                results = await asyncio.gather(*[api['run'](get_client(api['api']), 0, api['model'], user_prompt) for api in apis])
-                print("Running layers...")
-                for i in range(1, num_of_layers - 1):
-                    print(f"Layer {i}")
-                    results = await asyncio.gather(*[api['run'](get_client(api['api']), i, api['model'],user_prompt, prev_response=results) for api in apis])
+                if num_of_layers>1:
+                    print('Layer 0')
+                    results = await asyncio.gather(*[api['run'](get_client(api['api']), 0, api['model'], user_prompt) for api in apis])
+                    print("Running layers...")
+                    for i in range(1, num_of_layers - 1):
+                        print(f"Layer {i}")
+                        results = await asyncio.gather(*[api['run'](get_client(api['api']), i, api['model'],user_prompt, prev_response=results) for api in apis])
+                else:
+                    #go aggregator directly
+                    results={}
 
                 print(f"Final layer (Aggregator: {aggregator_api}: {aggregator_model})")
                 print()

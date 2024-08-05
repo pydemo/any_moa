@@ -24,16 +24,18 @@ class AsyncClient(AsyncInferenceClient):
         pass
 
 async def get_final_stream(client,aggregator_model,user_prompt,  results):
-    sys_prompt = get_final_system_prompt( results)
-
-    
-    
-
-    messages=[
-        {
+    if results:
+        sys_prompt = [{
             "role": "system",
-            "content": sys_prompt,
-        },
+            "content": get_final_system_prompt( results),
+        } ]
+
+    else:
+        #just one shot infrence without layers  
+        sys_prompt=[]
+
+    messages=[ 
+        *sys_prompt,
         {"role": "user", "content": user_prompt},
     ]
     response = await client.chat_completion(messages, max_tokens=500)
