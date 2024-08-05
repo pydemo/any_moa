@@ -79,6 +79,18 @@ The CLI will prompt you to input instructions interactively:
 3.  It will create a response based on the combined outputs from these models.
 4.  You can keep the conversation going by entering additional prompts, with the system remembering the context of the ongoing interaction.
 
+## Standalone aggreagator
+```
+reference_models:
+  - name: "command-r-plus"
+    api: "cohere"
+    web_search: True
+
+aggregator:
+  - name: "gpt-4o"
+    api: "openai"  
+```
+
 ## Configuration
 
 The MOA system can be configured through modification/creation of new YAML files in 'config' dir:
