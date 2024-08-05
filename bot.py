@@ -72,7 +72,7 @@ def main(yaml_file_path, num_of_layers):
         try:
             while True:
                 print()
-                default_prompt="Top things to do in Jersey City"
+                default_prompt="What is 42?"
                 user_prompt = input(f"Enter your prompt ({default_prompt}): ")
                 if not user_prompt:
                     user_prompt = default_prompt
