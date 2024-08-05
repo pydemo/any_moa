@@ -1,0 +1,4 @@
+reference_models:
+  - name: "IlyaGusev/gemma-2-2b-it-abliterated"
+    api: "hugging_face"
+    aggregator: True

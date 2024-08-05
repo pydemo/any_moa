@@ -1,0 +1,10 @@
+reference_models:
+  - name: "command-r-plus"
+    api: "cohere"
+    web_search: True
+
+aggregator:
+  - name: "gpt-4o"
+    api: "openai"  
+
+      

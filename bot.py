@@ -44,7 +44,17 @@ def close_clients():
     global clients
     for client in clients.values():
         client.close()
-
+def get_aggregator(data):
+    if 'aggregator' in data:
+        reference_aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
+        assert reference_aggregator_model is None, f"Ignoring aggregator defined in reference_models: {reference_aggregator_model}"
+        assert len(data['aggregator'])==1, f"Only one aggregator model is supported"
+        aggregator_model = data['aggregator'][0]['name']
+        aggregator_api = data['aggregator'][0]['api']
+    else:
+        aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
+        aggregator_api = next((model['api'] for model in data['reference_models'] if model.get('aggregator')), None)
+    return aggregator_model, aggregator_api
 @click.command()
 @click.argument('yaml_file_path', type=click.Path(exists=True))
 @click.argument('num_of_layers', type=int, default=3)
@@ -57,11 +67,10 @@ def main(yaml_file_path, num_of_layers):
         reference_models = data['reference_models']
         save_models(reference_models)
 
-
-        aggregator_model = next((model['name'] for model in data['reference_models'] if model.get('aggregator')), None)
-        aggregator_api = next((model['api'] for model in data['reference_models'] if model.get('aggregator')), None)
+        aggregator_model, aggregator_api = get_aggregator(data) 
         print(f"Aggregator API: {aggregator_api}")
         print(f"Aggregator model: {aggregator_model}")
+        
         print("Running main loop...")
         try:
             while True:
