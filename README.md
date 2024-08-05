@@ -11,7 +11,7 @@ Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=re
 - Real-time streaming of responses
 
 ## APIs
-OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia, Deepseek, Hugging Face, Anthropic, Google Gemini, Cohere
+OpeaAI, Groq, DeepInfra, Together, Mistral, Nvidia, Deepseek, Hugging Face, Anthropic, Google Gemini, Cohere, Palm2
 
 ## CLI Demo
 
@@ -31,6 +31,7 @@ To run one shot or interactive demo, follow these 3 steps:
     export HUGGING_FACE_API_KEY={your_key}
     export ANHROPIC_API_KEY={your_key}
     export GEMINI_API_KEY={your_project_name}
+    export PALM2_API_KEY={your_project_name}
     export COHERE_API_KEY={your_key}  <- web search
 ```
 2. ### Install Requirements:
@@ -45,7 +46,7 @@ To run one shot or interactive demo, follow these 3 steps:
 `python bot.py  config\mixed_reference_models.yaml 3` 
 
 #### Model file
-Mixed model file contains models from different API vendors: Groq, Together, OpenAI, Mistra, Nvidia, DeepSeek, Hugging Face, Google Gemini, Deepinfra, and Cohere
+Mixed model file contains models from different API vendors: Groq, Together, OpenAI, Mistra, Nvidia, DeepSeek, Hugging Face, Google Gemini, Deepinfra, Palm2, and Cohere
 ```
 reference_models:
   - name: "llama3-70b-8192"
@@ -70,7 +71,9 @@ reference_models:
   - name: "gemini-1.5-flash"
     api: "gemini"
   - name: "command-r-plus"
-    api: "cohere" 
+    api: "cohere"
+  - name: "chat-bison@001"
+    api: "palm2" 
 ```
 The CLI will prompt you to input instructions interactively:
 
