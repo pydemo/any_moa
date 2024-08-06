@@ -1,0 +1,6 @@
+aggregator:
+  - name: "playgroundai/playground-v2.5-1024px-aesthetic"
+    api: "hugging_face"
+
+
+    

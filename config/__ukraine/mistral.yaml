@@ -1,0 +1,6 @@
+#level 1
+aggregator:
+  - name: "SherlockAssistant/Mistral-7B-Instruct-Ukrainian"
+    api: "hugging_face"  
+
+      

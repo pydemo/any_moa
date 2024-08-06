@@ -52,7 +52,8 @@ def save_models(reference_models):
 @click.command()
 @click.argument('yaml_file_path', type=click.Path(exists=True))
 @click.argument('num_of_layers', type=int, default=3)
-def main(yaml_file_path, num_of_layers):
+@click.argument('generate_image', type=int, default=0)
+def main(yaml_file_path, num_of_layers, generate_image):
     async def async_main():
         """Run the main loop of the MOA process."""
         with open(yaml_file_path, 'r') as file:
@@ -94,10 +95,37 @@ def main(yaml_file_path, num_of_layers):
                 print(f"Final layer (Aggregator: {aggregator_api}: {aggregator_model})")
                 print()
                 final_stream_api = globals()[aggregator_api].get_final_stream
+                out=[]
                 async for chunk in final_stream_api(get_client(aggregator_api), aggregator_model,user_prompt,results):
                     if chunk:
+                        out.append(chunk)
                         print(chunk, end='', flush=True)
                 print()
+
+                if generate_image:
+                    assert out
+                    from include.api.flux import generate_images, download_image, open_image
+                    prompt=' '.join(out)
+                    print('Generating image...')
+                    result = generate_images(prompt)
+                    
+                    for img in result['images']:
+                        img_url = img['url']
+                        fn = download_image(img_url)
+                        
+                        print(f"Image saved at: {fn}")
+                        
+                        if open_image(fn):
+                            print("Image opened successfully. Please check your image viewer.")
+                            if 0:
+                                # Wait for user confirmation
+                                input("Press Enter to continue...")
+                                
+                
+                        else:
+                            print("Failed to open the image. Please check the saved location and try to open it manually.")
+
+
         finally:
             close_clients()
     asyncio.run(async_main())
