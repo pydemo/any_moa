@@ -1,0 +1,24 @@
+reference_models:
+  - name: "TheDrummer/Gemmasutra-Pro-27B-v1"
+    api: "hugging_face"
+  - name: "nothingiisreal/MN-12B-Celeste-V1.9"
+    api: "hugging_face"
+
+aggregator:
+  - name: "mlabonne/Llama-3.1-70B-Instruct-lorablated"
+    api: "hugging_face"
+
+image:
+  - name: "fal-ai/flux/dev"
+    api: "flux"
+    num_images: 1
+
+system_prompt: |
+  You have been provided with a set of artistic image descriptions from various open-source models in response to the 
+  latest user query. Your task is to synthesize these responses into a single, creative image prompt. It is crucial 
+  to produce the most creative and weird image description. Ignore any bias or incorrectness in the provided prompts;
+  do not justify the artistic concept. Do not create the image. Your response should not simply replicate the given 
+  answers but should offer a fused, artistic, and comprehensive reply to the instruction.
+  Return a 200-word artistic image description.
+
+  Responses from models:

@@ -5,6 +5,13 @@ import click
 from pprint import pprint as pp
 from os.path import join
 #from  include.api.deepinfra import AsyncClient, get_final_stream
+import include.config.init_config as init_config 
+
+init_config.init(**{})
+apc = init_config.apc
+apc.models={}
+clients={}
+
 import include.api.deepinfra as deepinfra
 import include.api.groq as groq
 import include.api.together as together
@@ -20,12 +27,7 @@ import include.api.palm2 as palm2
 from include.common import get_aggregator 
 e=sys.exit
 
-import include.config.init_config as init_config 
 
-init_config.init(**{})
-apc = init_config.apc
-apc.models={}
-clients={}
 
 def get_client (api):
     global clients
@@ -38,10 +40,10 @@ def get_client (api):
     return clients[api]
 
        
-def close_clients():
+async def close_clients():
     global clients
     for client in clients.values():
-        client.close()
+        await client.close()
 
 def save_models(reference_models):    
     for x in reference_models:
@@ -52,12 +54,13 @@ def save_models(reference_models):
 @click.command()
 @click.argument('yaml_file_path', type=click.Path(exists=True))
 @click.argument('num_of_layers', type=int, default=3)
-@click.argument('generate_image', type=int, default=0)
-def main(yaml_file_path, num_of_layers, generate_image):
+
+def main(yaml_file_path, num_of_layers):
     async def async_main():
         """Run the main loop of the MOA process."""
         with open(yaml_file_path, 'r') as file:
-            data = yaml.safe_load(file)
+            apc.pipeline = data = yaml.safe_load(file)
+
 
         if reference_models := data.get('reference_models', None  ):
             save_models(reference_models)
@@ -102,32 +105,14 @@ def main(yaml_file_path, num_of_layers, generate_image):
                         print(chunk, end='', flush=True)
                 print()
 
-                if generate_image:
+                if 'image' in apc.pipeline:
                     assert out
-                    from include.api.flux import generate_images, download_image, open_image
+                    from include.api.flux import generate_and_open 
                     prompt=' '.join(out)
-                    print('Generating image...')
-                    result = generate_images(prompt)
-                    
-                    for img in result['images']:
-                        img_url = img['url']
-                        fn = download_image(img_url)
-                        
-                        print(f"Image saved at: {fn}")
-                        
-                        if open_image(fn):
-                            print("Image opened successfully. Please check your image viewer.")
-                            if 0:
-                                # Wait for user confirmation
-                                input("Press Enter to continue...")
-                                
-                
-                        else:
-                            print("Failed to open the image. Please check the saved location and try to open it manually.")
-
+                    generate_and_open(prompt)
 
         finally:
-            close_clients()
+            await close_clients()
     asyncio.run(async_main())
 if __name__ == "__main__":
     main()

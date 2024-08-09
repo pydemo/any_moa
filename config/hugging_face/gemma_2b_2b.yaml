@@ -1,0 +1,6 @@
+aggregator:
+  - name: "google/gemma-2-2b-it"
+    api: "hugging_face"
+
+  
+

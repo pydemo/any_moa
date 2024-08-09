@@ -28,19 +28,25 @@ class AsyncClient(AsyncTogether):
 
 async def get_final_stream(client, aggregator_model,user_prompt, results):
     sys_prompt = get_final_system_prompt( results)
-    
-    final_stream = await client.chat.completions.create(
-        model=aggregator_model,
-        messages=[
-            {
-                "role": "system",
-                "content": sys_prompt,
-            },
-            {"role": "user", "content": user_prompt},
-        ],
-        stream=True,
-    )
-
+    try:
+        for sleep_time in [1, 2, 4]:
+            final_stream = await client.chat.completions.create(
+                model=aggregator_model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": sys_prompt,
+                    },
+                    {"role": "user", "content": user_prompt},
+                ],
+                stream=True,
+            )
+            print(f"\t\tget_final_stream: together: Sleep: {sleep_time}: Model: ", aggregator_model)
+            break
+    except together.error.RateLimitError as e:
+        print(e)
+        await asyncio.sleep(sleep_time)
+        
     async for chunk in final_stream:
         yield chunk.choices[0].delta.content or ""
 

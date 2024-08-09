@@ -20,7 +20,7 @@ class AsyncClient(AsyncInferenceClient):
         
         return response
             
-    def close(self) -> None:
+    async def  close(self) -> None:
         pass
 
 async def get_final_stream(client,aggregator_model,user_prompt,  results):

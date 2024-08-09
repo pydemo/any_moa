@@ -115,8 +115,7 @@ class AsyncClient:
             stream=False,  # Ensure streaming is disabled
         )
         return response.text  # Access the text attribute directly            
-    def close(self) -> None:
-        pass
+
 
     async def stream_content(self, model, contents):
         stream = await model.generate_content_async(

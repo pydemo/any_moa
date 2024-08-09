@@ -1,0 +1,3 @@
+aggregator:
+  - name: "Replete-AI/Replete-Coder-Llama3-8B"
+    api: "hugging_face"
