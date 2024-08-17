@@ -33,6 +33,7 @@ To run one shot or interactive demo, follow these 3 steps:
     export GEMINI_API_KEY={your_project_name}
     export PALM2_API_KEY={your_project_name}
     export COHERE_API_KEY={your_key}  <- web search
+    export FAL_KEY={your_flux_key} <-image gen
 ```
 2. ### Install Requirements:
 ```
