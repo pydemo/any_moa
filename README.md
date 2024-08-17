@@ -39,6 +39,8 @@ To run one shot or interactive demo, follow these 3 steps:
    conda create -n any_moa
    conda activate any_moa
    pip install pyaml aiohttp groq together openai mistralai huggingface_hub anthropic google-cloud-aiplatform cohere vertexai
+   pip install fal_client
+
 ```
 
 3. ### Run the interactive CLI script:
