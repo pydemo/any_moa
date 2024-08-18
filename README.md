@@ -97,7 +97,7 @@ aggregator:
     api: "openai"  
 ```
 
-## Flus.1 image generation 
+## Flux.1 image generation 
 ```
 reference_models:
   - name: "TheDrummer/Gemmasutra-Pro-27B-v1"
