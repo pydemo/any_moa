@@ -141,7 +141,7 @@ This project is licensed under the Apache 2.0. See the [LICENSE](LICENSE) file f
 
 ## Related Articles
 
-Check out my [Medium article](https://medium.com/p/23f4fd43e72d) for more information about this project.
+Check out my [Medium article](https://medium.com/p/23f4fd43e72d) for more information about this project.<br>
 Previous artwork: [wxChat](https://github.com/myaichat/wxchat) - wxPython inference api 
 
 
