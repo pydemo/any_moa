@@ -1,3 +1,4 @@
+Next artwork : (Any_COT)[https://github.com/myaichat/any_cot]
 # any_moa
 Mixture Of Agents with flexible input model sets from different API vendors.
 Yet another fork from [grog-moa](https://github.com/skapadia3214/groq-moa?tab=readme-ov-file) and [together-moa](https://github.com/togethercomputer/MoA?tab=readme-ov-file#multi-layer-moa-example)
